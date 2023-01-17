@@ -1,0 +1,750 @@
+Lib file ./white_box_arx.so already exists, loading it
+8 rounds
+White-box ID (used for caching): 0x1d929d24
+
+Time report:
+                    wbc-round-query:  17.1 ms - 17.1 ms  (avg: 17.1 ms med: 17.1 ms)  10 runs, 0 fails
+
+
+
+
+========================
+ROUND 1
+========================
+cache/wbid1D929D24_round01_Q
+Date (quad stage): 2023-01-17 16:45:53.866277
+affine bits: 14
+quadratic bits: 3
+
+quad ANFs: 259 terms; 223 terms; 222 terms; 
+output sum [15] : LS dim 28
+   candidate pairs for x1x2 + x3x4: 12
+output sum [16] : LS dim 30
+    candidate x1x2: 1
+output sum [17] : LS dim 30
+    candidate x1x2: 1
+output sum [15, 16] : LS dim 28
+   candidate pairs for x1x2 + x3x4: 12
+output sum [15, 17] : LS dim 28
+   candidate pairs for x1x2 + x3x4: 12
+output sum [16, 17] : LS dim 30
+    candidate x1x2: 1
+output sum [15, 16, 17] : LS dim 30
+    candidate x1x2: 1
+
+take 1 mono 00000000000000001000000000000000 (16,) 2
+take 1 mono 00000000000000000100000000000000 (17,) 3
+take 1 mono 00000000000000011100000000000000 (15, 16, 17) 5
+indep. output bits with 1 monomial 3
+
+indep. output bits with <=2 monomials 3
+6 invoved input bits, 3 output bits
+
+3 pairs of inputs (monomials)
+(13,) (14,)
+(14,) (15,)
+(16,) (17,)
+
+T=5, quad_basis=[13, 14, 15, 16, 17]
+Precomputing inverse system... n = 16
+  1089 monomials, 33 x-monomials
+  187 equations
+13 14 11101100001010010000000000000000
+14 15 01100110111011010000000000000000
+16 17 01100101010100000000000000000000
+
+PRECOMPUTE FAST ORACLES
+Date (affine stage): 2023-01-17 16:47:58.359356
+cache/wbid1D929D24_round01_ASA
+Date (totry=8): 2023-01-17 16:47:58.359482
+recover_left_to_triangular
+recover_left_triangles
+generating pool of random (r) with 8 solutions for A,B,C values... <attack_state.AttackState object at 0x7f5dc009e3b0>
+carry -1 rank 17 / 18
+choice B failed (recover_carry), trying again.. failed to find invertible fix..
+carry -1 rank 17 / 18
+Success!
+RNO: N=32 nlin=14 nquad=3 nquad_x=5 skip1=0 num1=3 skip2h=0
+
+
+
+========================
+ROUND 2
+========================
+cache/wbid1D929D24_round02_Q
+Date (quad stage): 2023-01-17 16:48:24.289633
+affine bits: 15
+quadratic bits: 2
+
+quad ANFs: 262 terms; 286 terms; 
+output sum [15] : LS dim 28
+   candidate pairs for x1x2 + x3x4: 12
+output sum [16] : LS dim 26
+output sum [15, 16] : LS dim 30
+    candidate x1x2: 1
+
+take 1 mono 00000000000000011000000000000000 (15, 16) 2
+indep. output bits with 1 monomial 1
+
+take 2 mono 00000000000000010000000000000000 (15,) 6
+indep. output bits with <=2 monomials 2
+6 invoved input bits, 2 output bits
+
+3 pairs of inputs (monomials)
+(11,) (12,)
+(13,) (14,)
+(15,) (16,)
+
+T=6, quad_basis=[11, 12, 13, 14, 15, 16]
+Precomputing inverse system... n = 16
+  1089 monomials, 33 x-monomials
+  188 equations
+value mismatch for 000101 2 exception: no solutions, rank 33 / 33
+000101 4700 221 219
+1 00000000000000000000000000000000 (1, 2, 3, 4, 6, 8, 10, 13, 15, 32)
+empty sol is ok
+GOOD, CORRECTING EQUATION (1, 2, 3, 4, 6, 8, 10, 13, 15, 32)
+187 rows (new number)
+
+11 12 10101011110000000000000000000000
+13 14 01101111010000000000000000000000
+15 16 01101111010000000000000000000000
+
+PRECOMPUTE FAST ORACLES
+Date (affine stage): 2023-01-17 16:49:55.458477
+cache/wbid1D929D24_round02_ASA
+Date (totry=8): 2023-01-17 16:49:55.458617
+recover_left_to_triangular
+recover_left_triangles
+50 28 24
+generating pool of random (r) with 8 solutions for A,B,C values... <attack_state.AttackState object at 0x7f5dc1231450>
+generating pool of random (r) with 8 solutions for A,B,C values... <attack_state.AttackState object at 0x7f5dc121d7b0>
+carry -1 rank 17 / 18
+Success!
+RNO: N=32 nlin=15 nquad=2 nquad_x=6 skip1=0 num1=1 skip2h=0 num2_4=1
+
+
+
+========================
+ROUND 3
+========================
+cache/wbid1D929D24_round03_Q
+Date (quad stage): 2023-01-17 16:50:12.918994
+affine bits: 15
+quadratic bits: 2
+
+quad ANFs: 280 terms; 235 terms; 
+output sum [15] : LS dim 28
+   candidate pairs for x1x2 + x3x4: 24
+output sum [16] : LS dim 30
+    candidate x1x2: 1
+output sum [15, 16] : LS dim 30
+    candidate x1x2: 1
+
+take 1 mono 00000000000000001000000000000000 (16,) 2
+take 1 mono 00000000000000011000000000000000 (15, 16) 4
+indep. output bits with 1 monomial 2
+
+indep. output bits with <=2 monomials 2
+4 invoved input bits, 2 output bits
+
+2 pairs of inputs (monomials)
+(13,) (14,)
+(15,) (16,)
+
+T=4, quad_basis=[13, 14, 15, 16]
+Precomputing inverse system... n = 16
+  1089 monomials, 33 x-monomials
+  187 equations
+13 14 11110100001000000000000000000000
+15 16 01011100010100000000000000000000
+
+PRECOMPUTE FAST ORACLES
+Date (affine stage): 2023-01-17 16:51:30.040074
+cache/wbid1D929D24_round03_ASA
+Date (totry=8): 2023-01-17 16:51:30.040199
+recover_left_to_triangular
+recover_left_triangles
+generating pool of random (r) with 8 solutions for A,B,C values... <attack_state.AttackState object at 0x7f5dbf4b4b20>
+carry -1 rank 17 / 18
+Success!
+RNO: N=32 nlin=15 nquad=2 nquad_x=4 skip1=0 num1=2 skip2h=0
+
+
+
+========================
+ROUND 4
+========================
+cache/wbid1D929D24_round04_Q
+Date (quad stage): 2023-01-17 16:51:44.659700
+affine bits: 14
+quadratic bits: 3
+
+quad ANFs: 267 terms; 255 terms; 121 terms; 
+output sum [15] : LS dim 26
+output sum [16] : LS dim 28
+   candidate pairs for x1x2 + x3x4: 12
+output sum [17] : LS dim 30
+    candidate x1x2: 1
+output sum [15, 16] : LS dim 30
+    candidate x1x2: 1
+output sum [15, 17] : LS dim 26
+output sum [16, 17] : LS dim 26
+output sum [15, 16, 17] : LS dim 30
+    candidate x1x2: 1
+
+take 1 mono 00000000000000000100000000000000 (17,) 2
+take 1 mono 00000000000000011000000000000000 (15, 16) 3
+indep. output bits with 1 monomial 2
+
+take 2 mono 00000000000000001000000000000000 (16,) 7
+indep. output bits with <=2 monomials 3
+8 invoved input bits, 3 output bits
+
+4 pairs of inputs (monomials)
+(11,) (12,)
+(13,) (11, 12)
+(14,) (15,)
+(16,) (17,)
+
+T=7, quad_basis=[11, 12, 13, 14, 15, 16, 17]
+Precomputing inverse system... n = 16
+  1089 monomials, 33 x-monomials
+  188 equations
+value mismatch for 0110000 2 exception: no solution, rank 32 / 33
+0110000 4700 221 219
+Q decomposition failed: no sols retrying from scratch
+Date (quad stage): 2023-01-17 16:53:08.086925
+affine bits: 14
+quadratic bits: 3
+
+quad ANFs: 273 terms; 211 terms; 275 terms; 
+output sum [15] : LS dim 26
+output sum [16] : LS dim 30
+    candidate x1x2: 1
+output sum [17] : LS dim 28
+   candidate pairs for x1x2 + x3x4: 18
+output sum [15, 16] : LS dim 26
+output sum [15, 17] : LS dim 30
+    candidate x1x2: 1
+output sum [16, 17] : LS dim 26
+output sum [15, 16, 17] : LS dim 30
+    candidate x1x2: 1
+
+take 1 mono 00000000000000001000000000000000 (16,) 2
+take 1 mono 00000000000000010100000000000000 (15, 17) 3
+indep. output bits with 1 monomial 2
+
+take 2 mono 00000000000000000100000000000000 (17,) 7
+indep. output bits with <=2 monomials 3
+8 invoved input bits, 3 output bits
+
+4 pairs of inputs (monomials)
+(11,) (12,)
+(13,) (11,)
+(14,) (15,)
+(16,) (17,)
+
+T=7, quad_basis=[11, 12, 13, 14, 15, 16, 17]
+Precomputing inverse system... n = 16
+  1089 monomials, 33 x-monomials
+  187 equations
+11 12 01100011001011001000000000000000
+11 13 10110010110010000000000000000000
+14 15 10100000011000000000000000000000
+16 17 10100000011000000000000000000000
+
+PRECOMPUTE FAST ORACLES
+Date (affine stage): 2023-01-17 16:53:59.205061
+cache/wbid1D929D24_round04_ASA
+Date (totry=8): 2023-01-17 16:53:59.205166
+recover_left_to_triangular
+recover_left_triangles
+generating pool of random (r) with 8 solutions for A,B,C values... <attack_state.AttackState object at 0x7f5dc00f7a30>
+generating pool of random (r) with 8 solutions for A,B,C values... <attack_state.AttackState object at 0x7f5dc149edd0>
+carry -1 rank 17 / 18
+Success!
+RNO: N=32 nlin=14 nquad=3 nquad_x=7 skip1=0 num1=2 skip2h=0 num2_4=1
+
+
+
+========================
+ROUND 5
+========================
+cache/wbid1D929D24_round05_Q
+Date (quad stage): 2023-01-17 16:54:09.289717
+affine bits: 14
+quadratic bits: 3
+
+quad ANFs: 206 terms; 235 terms; 160 terms; 
+output sum [15] : LS dim 30
+    candidate x1x2: 1
+output sum [16] : LS dim 26
+output sum [17] : LS dim 30
+    candidate x1x2: 1
+output sum [15, 16] : LS dim 26
+output sum [15, 17] : LS dim 30
+    candidate x1x2: 1
+output sum [16, 17] : LS dim 28
+   candidate pairs for x1x2 + x3x4: 12
+output sum [15, 16, 17] : LS dim 26
+
+take 1 mono 00000000000000010000000000000000 (15,) 2
+take 1 mono 00000000000000000100000000000000 (17,) 3
+indep. output bits with 1 monomial 2
+
+take 2 mono 00000000000000001100000000000000 (16, 17) 7
+indep. output bits with <=2 monomials 3
+8 invoved input bits, 3 output bits
+
+4 pairs of inputs (monomials)
+(11,) (12,)
+(13,) (11, 12, 13)
+(14,) (15,)
+(16,) (17,)
+
+T=7, quad_basis=[11, 12, 13, 14, 15, 16, 17]
+Precomputing inverse system... n = 16
+  1089 monomials, 33 x-monomials
+  191 equations
+value mismatch for 0010001 2 exception: no solutions, rank 33 / 33
+0010001 4775 224 221
+strange: too many sols / one error equation
+
+value mismatch for 0010100 2 exception: no solutions, rank 33 / 33
+0010100 4775 224 221
+strange: too many sols / one error equation
+
+value mismatch for 0110000 2 exception: no solutions, rank 33 / 33
+0110000 4775 224 222
+Q decomposition failed: no sols retrying from scratch
+Date (quad stage): 2023-01-17 16:55:12.710927
+affine bits: 14
+quadratic bits: 3
+
+quad ANFs: 256 terms; 284 terms; 222 terms; 
+output sum [15] : LS dim 26
+output sum [16] : LS dim 26
+output sum [17] : LS dim 28
+   candidate pairs for x1x2 + x3x4: 22
+output sum [15, 16] : LS dim 30
+    candidate x1x2: 1
+output sum [15, 17] : LS dim 30
+    candidate x1x2: 1
+output sum [16, 17] : LS dim 30
+    candidate x1x2: 1
+output sum [15, 16, 17] : LS dim 26
+
+take 1 mono 00000000000000011000000000000000 (15, 16) 2
+take 1 mono 00000000000000010100000000000000 (15, 17) 3
+indep. output bits with 1 monomial 2
+
+take 2 mono 00000000000000000100000000000000 (17,) 7
+indep. output bits with <=2 monomials 3
+8 invoved input bits, 3 output bits
+
+4 pairs of inputs (monomials)
+(11,) (12,)
+(11, 12) (13,)
+(14,) (15,)
+(16,) (17,)
+
+T=7, quad_basis=[11, 12, 13, 14, 15, 16, 17]
+Precomputing inverse system... n = 16
+  1089 monomials, 33 x-monomials
+  190 equations
+value mismatch for 0110000 2 exception: no solutions, rank 33 / 33
+0110000 4750 223 221
+Q decomposition failed: no sols retrying from scratch
+Date (quad stage): 2023-01-17 16:55:56.564081
+affine bits: 14
+quadratic bits: 3
+
+quad ANFs: 192 terms; 282 terms; 267 terms; 
+output sum [15] : LS dim 30
+    candidate x1x2: 1
+output sum [16] : LS dim 28
+   candidate pairs for x1x2 + x3x4: 16
+output sum [17] : LS dim 26
+output sum [15, 16] : LS dim 26
+output sum [15, 17] : LS dim 26
+output sum [16, 17] : LS dim 30
+    candidate x1x2: 1
+output sum [15, 16, 17] : LS dim 30
+    candidate x1x2: 1
+
+take 1 mono 00000000000000010000000000000000 (15,) 2
+take 1 mono 00000000000000001100000000000000 (16, 17) 3
+indep. output bits with 1 monomial 2
+
+take 2 mono 00000000000000001000000000000000 (16,) 7
+indep. output bits with <=2 monomials 3
+8 invoved input bits, 3 output bits
+
+4 pairs of inputs (monomials)
+(11,) (12,)
+(11,) (13,)
+(14,) (15,)
+(16,) (17,)
+
+T=7, quad_basis=[11, 12, 13, 14, 15, 16, 17]
+Precomputing inverse system... n = 16
+  1089 monomials, 33 x-monomials
+  190 equations
+value mismatch for 0010001 2 exception: no solutions, rank 33 / 33
+0010001 4750 223 221
+1 00000000000000000000000000000000 (0, 4, 6, 8, 9, 11, 16, 17, 32, 33, 34)
+empty sol is ok
+GOOD, CORRECTING EQUATION (0, 4, 6, 8, 9, 11, 16, 17, 32, 33, 34)
+189 rows (new number)
+
+value mismatch for 0110000 2 exception: no solutions, rank 33 / 33
+0110000 4725 222 220
+1 00000000000000000000000000000000 (0, 1, 7, 8, 11, 12, 13, 32, 33)
+empty sol is ok
+GOOD, CORRECTING EQUATION (0, 1, 7, 8, 11, 12, 13, 32, 33)
+188 rows (new number)
+
+value mismatch for 1010000 2 exception: no solutions, rank 33 / 33
+1010000 4700 221 219
+1 01110010100010000000000000000000 (3, 5, 6, 7, 11, 67, 96)
+1 01000011001010100000000000000000 (4, 5, 6, 7, 8, 9, 15, 67, 96)
+GOOD, CORRECTING EQUATION (4, 5, 6, 7, 8, 9, 15, 67, 96)
+187 rows (new number)
+
+11 12 11001101111011100000000000000000
+11 13 01000011001010100000000000000000
+14 15 10000001010000000000000000000000
+16 17 10000001010000000000000000000000
+
+PRECOMPUTE FAST ORACLES
+Date (affine stage): 2023-01-17 16:57:05.839999
+cache/wbid1D929D24_round05_ASA
+Date (totry=8): 2023-01-17 16:57:05.840104
+recover_left_to_triangular
+recover_left_triangles
+generating pool of random (r) with 8 solutions for A,B,C values... <attack_state.AttackState object at 0x7f5dbf479d20>
+carry -1 rank 17 / 18
+Success!
+RNO: N=32 nlin=14 nquad=3 nquad_x=7 skip1=0 num1=2 skip2h=0 num2_4=1
+
+
+
+========================
+ROUND 6
+========================
+cache/wbid1D929D24_round06_Q
+Date (quad stage): 2023-01-17 16:57:14.879744
+affine bits: 14
+quadratic bits: 3
+
+quad ANFs: 237 terms; 256 terms; 177 terms; 
+output sum [15] : LS dim 30
+    candidate x1x2: 1
+output sum [16] : LS dim 28
+   candidate pairs for x1x2 + x3x4: 12
+output sum [17] : LS dim 30
+    candidate x1x2: 1
+output sum [15, 16] : LS dim 28
+   candidate pairs for x1x2 + x3x4: 12
+output sum [15, 17] : LS dim 30
+    candidate x1x2: 1
+output sum [16, 17] : LS dim 30
+    candidate x1x2: 1
+output sum [15, 16, 17] : LS dim 28
+   candidate pairs for x1x2 + x3x4: 12
+
+take 1 mono 00000000000000010000000000000000 (15,) 2
+take 1 mono 00000000000000000100000000000000 (17,) 3
+take 1 mono 00000000000000001100000000000000 (16, 17) 5
+indep. output bits with 1 monomial 3
+
+indep. output bits with <=2 monomials 3
+6 invoved input bits, 3 output bits
+
+3 pairs of inputs (monomials)
+(13,) (14,)
+(15,) (14, 15)
+(16,) (17,)
+
+T=5, quad_basis=[13, 14, 15, 16, 17]
+Precomputing inverse system... n = 16
+  1089 monomials, 33 x-monomials
+  189 equations
+value mismatch for 01100 2 exception: no solutions, rank 33 / 33
+01100 4725 222 220
+1 11000101101111000000000000000000 (0, 1, 4, 5, 6, 10, 15, 16, 18)
+1 01110011100011000000000000000000 (0, 3, 5, 7, 10, 11, 12, 15, 16, 18)
+GOOD, CORRECTING EQUATION (0, 1, 4, 5, 6, 10, 15, 16, 18)
+188 rows (new number)
+
+value mismatch for 10100 2 exception: no solutions, rank 33 / 33
+10100 4700 221 219
+1 10110110001100000000000000000000 (0, 1, 4, 5, 6, 7, 8, 10, 15, 17, 32)
+1 00000000000000000000000000000000 (0, 3, 5, 8, 10, 11, 12, 15, 17, 32)
+empty sol is ok
+GOOD, CORRECTING EQUATION (0, 3, 5, 8, 10, 11, 12, 15, 17, 32)
+187 rows (new number)
+
+13 14 01100111000001010000000000000000
+14 15 11000101101111000000000000000000
+16 17 01001111000000000000000000000000
+
+PRECOMPUTE FAST ORACLES
+Date (affine stage): 2023-01-17 16:58:22.277414
+cache/wbid1D929D24_round06_ASA
+Date (totry=8): 2023-01-17 16:58:22.277525
+recover_left_to_triangular
+recover_left_triangles
+!!! failed convergence w=6 i=0 itr 1500 diffs 1 17
+[31, 31, 49, 67, 74, 130, 164, 181, 365, 408] 0.272 total 1500
+[29, 46, 46, 48, 84, 111, 148, 194, 387, 407] 0.2713333333333333 total 1500
+MSB FAIL # 8 refresh Q solution recover_left_triangles convergence failed
+Refresh solution
+value mismatch for 01100 2 exception: no solutions, rank 33 / 33
+01100 4725 222 220
+1 11000101101111000000000000000000 (0, 1, 4, 5, 6, 10, 15, 16, 18)
+1 01110011100011000000000000000000 (0, 3, 5, 7, 10, 11, 12, 15, 16, 18)
+GOOD, CORRECTING EQUATION (0, 3, 5, 7, 10, 11, 12, 15, 16, 18)
+188 rows (new number)
+
+value mismatch for 10100 2 exception: no solutions, rank 33 / 33
+10100 4700 221 219
+1 00000000000000000000000000000000 (0, 1, 4, 5, 6, 7, 8, 10, 15, 17, 32)
+empty sol is ok
+GOOD, CORRECTING EQUATION (0, 1, 4, 5, 6, 7, 8, 10, 15, 17, 32)
+187 rows (new number)
+
+13 14 11010001001101010000000000000000
+14 15 01110011100011000000000000000000
+16 17 01001111000000000000000000000000
+
+PRECOMPUTE FAST ORACLES
+Date (totry=8): 2023-01-17 16:58:47.170259
+recover_left_to_triangular
+recover_left_triangles
+generating pool of random (r) with 8 solutions for A,B,C values... <attack_state.AttackState object at 0x7f5dc14a3a60>
+carry -1 rank 17 / 18
+Success!
+RNO: N=32 nlin=14 nquad=3 nquad_x=5 skip1=0 num1=3 skip2h=0
+
+
+
+========================
+ROUND 7
+========================
+cache/wbid1D929D24_round07_Q
+Date (quad stage): 2023-01-17 16:58:56.554272
+affine bits: 14
+quadratic bits: 3
+
+quad ANFs: 197 terms; 274 terms; 281 terms; 
+output sum [15] : LS dim 30
+    candidate x1x2: 1
+output sum [16] : LS dim 30
+    candidate x1x2: 1
+output sum [17] : LS dim 28
+   candidate pairs for x1x2 + x3x4: 14
+output sum [15, 16] : LS dim 30
+    candidate x1x2: 1
+output sum [15, 17] : LS dim 26
+output sum [16, 17] : LS dim 26
+output sum [15, 16, 17] : LS dim 26
+
+take 1 mono 00000000000000010000000000000000 (15,) 2
+take 1 mono 00000000000000001000000000000000 (16,) 3
+indep. output bits with 1 monomial 2
+
+take 2 mono 00000000000000000100000000000000 (17,) 7
+indep. output bits with <=2 monomials 3
+8 invoved input bits, 3 output bits
+
+4 pairs of inputs (monomials)
+(11,) (12,)
+(13,) (12, 13)
+(14,) (15,)
+(16,) (17,)
+
+T=7, quad_basis=[11, 12, 13, 14, 15, 16, 17]
+Precomputing inverse system... n = 16
+  1089 monomials, 33 x-monomials
+  189 equations
+value mismatch for 0110000 2 exception: no solutions, rank 33 / 33
+0110000 4725 222 220
+1 11101111111100000000000000000000 (0, 3, 7, 8, 12, 13, 14, 15, 16)
+1 01110000000100011100000000000000 (0, 1, 3, 4, 5, 6, 9, 10, 11, 12, 13, 14, 15, 17, 18)
+GOOD, CORRECTING EQUATION (0, 3, 7, 8, 12, 13, 14, 15, 16)
+188 rows (new number)
+
+value mismatch for 1010000 2 exception: no solutions, rank 33 / 33
+1010000 4700 221 219
+1 00000000000000000000000000000000 (0, 1, 2, 6, 9, 10, 14, 32)
+empty sol is ok
+GOOD, CORRECTING EQUATION (0, 1, 2, 6, 9, 10, 14, 32)
+187 rows (new number)
+
+11 12 01110010001101000000000000000000
+12 13 11101111111100000000000000000000
+14 15 01110001001000000000000000000000
+16 17 01110001001000000000000000000000
+
+PRECOMPUTE FAST ORACLES
+Date (affine stage): 2023-01-17 16:59:58.768226
+cache/wbid1D929D24_round07_ASA
+Date (totry=8): 2023-01-17 16:59:58.768306
+recover_left_to_triangular
+recover_left_triangles
+generating pool of random (r) with 8 solutions for A,B,C values... <attack_state.AttackState object at 0x7f5dbf471ff0>
+generating pool of random (r) with 8 solutions for A,B,C values... <attack_state.AttackState object at 0x7f5dc1295cf0>
+carry -1 rank 17 / 18
+choice B failed (recover_carry), trying again.. failed to find invertible fix..
+generating pool of random (r) with 8 solutions for A,B,C values... <attack_state.AttackState object at 0x7f5dbf471ff0>
+generating pool of random (r) with 8 solutions for A,B,C values... <attack_state.AttackState object at 0x7f5dc150c040>
+carry -1 rank 17 / 18
+Success!
+RNO: N=32 nlin=14 nquad=3 nquad_x=7 skip1=0 num1=2 skip2h=0 num2_4=1
+ROUND  1:  N=32 nlin=14 nquad=3 nquad_x=5 skip1=0 num1=3 skip2h=0
+ROUND  2:  N=32 nlin=15 nquad=2 nquad_x=6 skip1=0 num1=1 skip2h=0 num2_4=1
+ROUND  3:  N=32 nlin=15 nquad=2 nquad_x=4 skip1=0 num1=2 skip2h=0
+ROUND  4:  N=32 nlin=14 nquad=3 nquad_x=7 skip1=0 num1=2 skip2h=0 num2_4=1
+ROUND  5:  N=32 nlin=14 nquad=3 nquad_x=7 skip1=0 num1=2 skip2h=0 num2_4=1
+ROUND  6:  N=32 nlin=14 nquad=3 nquad_x=5 skip1=0 num1=3 skip2h=0
+ROUND  7:  N=32 nlin=14 nquad=3 nquad_x=7 skip1=0 num1=2 skip2h=0 num2_4=1
+
+Time report:
+                    wbc-round-query:  17.1 ms - 17.1 ms  (avg: 17.1 ms med: 17.1 ms)  10 runs, 0 fails
+                   quad-recover-all:  51.1 s  - 2.1 min  (avg: 77.5 s  med: 69.2 s )  7 runs, 3 fails
+            affine-fastened-recover:  8.7 s   - 25.3 s   (avg: 14.3 s  med: 14.3 s )  7 runs, 1 fails
+            failed:quad-recover-all:  43.9 s  - 83.4 s   (avg: 63.6 s  med: 63.4 s )  3 runs, 0 fails
+     failed:affine-fastened-recover:  3.6 s   - 3.6 s    (avg: 3.6 s   med: 3.6 s  )  1 runs, 0 fails
+                   quad-refresh-sol:  21.2 s  - 21.2 s   (avg: 21.2 s  med: 21.2 s )  1 runs, 0 fails
+
+RNO 01:   N=32 nlin=14 nquad=3 nquad_x=5 skip1=0 num1=3 skip2h=0
+RNO 02:   N=32 nlin=15 nquad=2 nquad_x=6 skip1=0 num1=1 skip2h=0 num2_4=1
+RNO 03:   N=32 nlin=15 nquad=2 nquad_x=4 skip1=0 num1=2 skip2h=0
+RNO 04:   N=32 nlin=14 nquad=3 nquad_x=7 skip1=0 num1=2 skip2h=0 num2_4=1
+RNO 05:   N=32 nlin=14 nquad=3 nquad_x=7 skip1=0 num1=2 skip2h=0 num2_4=1
+RNO 06:   N=32 nlin=14 nquad=3 nquad_x=5 skip1=0 num1=3 skip2h=0
+RNO 07:   N=32 nlin=14 nquad=3 nquad_x=7 skip1=0 num1=2 skip2h=0 num2_4=1
+cache/wbid1D929D24_round01_ASA2
+recover_left_to_triangular
+recover_left_triangles
+generating pool of random (r) with 8 solutions for A,B,C values... <attack_state.AttackState object at 0x7f5dbbe99e40>
+carry -1 rank 17 / 18
+Success!
+cache/wbid1D929D24_round02_ASA2
+recover_left_to_triangular
+recover_left_triangles
+50 28 23
+generating pool of random (r) with 8 solutions for A,B,C values... <attack_state.AttackState object at 0x7f5dc127f340>
+carry -1 rank 17 / 18
+Success!
+cache/wbid1D929D24_round03_ASA2
+recover_left_to_triangular
+recover_left_triangles
+generating pool of random (r) with 8 solutions for A,B,C values... <attack_state.AttackState object at 0x7f5dbf47a800>
+carry -1 rank 17 / 18
+choice B failed (recover_carry), trying again.. failed to find invertible fix..
+carry -1 rank 17 / 18
+Success!
+cache/wbid1D929D24_round04_ASA2
+recover_left_to_triangular
+recover_left_triangles
+generating pool of random (r) with 8 solutions for A,B,C values... <attack_state.AttackState object at 0x7f5dbbf0ace0>
+generating pool of random (r) with 8 solutions for A,B,C values... <attack_state.AttackState object at 0x7f5dbbeae410>
+carry -1 rank 17 / 18
+choice B failed (recover_carry), trying again.. failed to find invertible fix..
+generating pool of random (r) with 8 solutions for A,B,C values... <attack_state.AttackState object at 0x7f5dbbf0ace0>
+generating pool of random (r) with 8 solutions for A,B,C values... <attack_state.AttackState object at 0x7f5dbbf05390>
+carry -1 rank 17 / 18
+choice B failed (recover_carry), trying again.. failed to find invertible fix..
+generating pool of random (r) with 8 solutions for A,B,C values... <attack_state.AttackState object at 0x7f5dbbf0ace0>
+generating pool of random (r) with 8 solutions for A,B,C values... <attack_state.AttackState object at 0x7f5dbbf079a0>
+carry -1 rank 17 / 18
+choice B failed (recover_carry), trying again.. failed to find invertible fix..
+generating pool of random (r) with 8 solutions for A,B,C values... <attack_state.AttackState object at 0x7f5dbbf0ace0>
+generating pool of random (r) with 8 solutions for A,B,C values... <attack_state.AttackState object at 0x7f5dbbf0a200>
+carry -1 rank 17 / 18
+choice B failed (recover_carry), trying again.. failed to find invertible fix..
+generating pool of random (r) with 8 solutions for A,B,C values... <attack_state.AttackState object at 0x7f5dbbf0ace0>
+generating pool of random (r) with 8 solutions for A,B,C values... <attack_state.AttackState object at 0x7f5dbbeb83d0>
+skipping singular B...
+carry -1 rank 17 / 18
+choice B failed (recover_carry), trying again.. failed to find invertible fix..
+generating pool of random (r) with 8 solutions for A,B,C values... <attack_state.AttackState object at 0x7f5dbbf0ace0>
+generating pool of random (r) with 8 solutions for A,B,C values... <attack_state.AttackState object at 0x7f5dbc28d930>
+carry -1 rank 17 / 18
+choice B failed (recover_carry), trying again.. failed to find invertible fix..
+generating pool of random (r) with 8 solutions for A,B,C values... <attack_state.AttackState object at 0x7f5dbbf0ace0>
+generating pool of random (r) with 8 solutions for A,B,C values... <attack_state.AttackState object at 0x7f5dbbeaf370>
+carry -1 rank 17 / 18
+Success!
+cache/wbid1D929D24_round05_ASA2
+recover_left_to_triangular
+recover_left_triangles
+generating pool of random (r) with 8 solutions for A,B,C values... <attack_state.AttackState object at 0x7f5dbbff8130>
+carry -1 rank 17 / 18
+choice B failed (recover_carry_sign), trying again.. Attack failed, choose another Bs
+carry -1 rank 17 / 18
+choice B failed (recover_carry), trying again.. failed to find invertible fix..
+carry -1 rank 17 / 18
+choice B failed (recover_carry), trying again.. failed to find invertible fix..
+carry -1 rank 17 / 18
+Success!
+cache/wbid1D929D24_round06_ASA2
+recover_left_to_triangular
+recover_left_triangles
+generating pool of random (r) with 8 solutions for A,B,C values... <attack_state.AttackState object at 0x7f5dbbe98250>
+generating pool of random (r) with 8 solutions for A,B,C values... <attack_state.AttackState object at 0x7f5dc128a8f0>
+skipping singular B...
+carry -1 rank 17 / 18
+Success!
+ 1:  5df2
+ 2:  5584
+ 3:  7cdd
+ 4:  3dec
+ 5:  6005
+=================
+suggested subkeys
+1df2 9584 7cdd 3dec 2005 3e48 88c2 d773 cd29 a6a1 
+
+differences excl. 2 MSBs
+0000 0000 0000 0000 0000
+
+master_key = 0x06cf, 0xbdce, 0x5990, 0x2e62
+06cf bf76 ...
+1df2 9584 7cdd 3dec 2005 3e48 88c2 d773 cd29 a6a1 0004 cd39 eeb7 493d b82d b947 9a21 23ce
+
+=================
+suggested subkeys
+1df2 9584 3cdd 3dec 2005 3ec8 8b42 dbf3 fab6 5547 
+
+differences excl. 2 MSBs
+0000 0000 0000 0000 0000
+
+master_key = 0x0539, 0x98cf, 0x9d97, 0x2e62
+0539 b08e ...
+1df2 9584 3cdd 3dec 2005 3ec8 8b42 dbf3 fab6 5547 1c22 7fc8 466b dd5e 2808 1d4a 71ea 9f1f
+
+=================
+suggested subkeys
+1df2 9584 fcdd 3dec 2005 3f48 8bc2 d873 f037 75f1 
+
+differences excl. 2 MSBs
+0000 0000 0000 0000 0000
+
+master_key = 0x06cb, 0x9fce, 0x2191, 0x2e62
+06cb bf26 ...
+1df2 9584 fcdd 3dec 2005 3f48 8bc2 d873 f037 75f1 be11 577e e91c 3592 70b7 feed 39b6 dfc9
+
+=================
+suggested subkeys
+1df2 9584 bcdd 3dec 2005 3fc8 8a42 dcf3 e5b4 3c47 
+
+differences excl. 2 MSBs
+0000 0000 0000 0000 0000
+
+master_key = 0x06dd, 0xa6ce, 0x9590, 0x2e62
+06dd bf5e ...
+1df2 9584 bcdd 3dec 2005 3fc8 8a42 dcf3 e5b4 3c47 c125 bcca 1538 d376 c332 e425 81b2 5217
+
