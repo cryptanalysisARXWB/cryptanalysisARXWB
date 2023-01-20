@@ -45,7 +45,13 @@ class QuadDecomposition:
         self.quad_parts_seen = set()
         self.sQi = None
 
-    def recover_all(self, state=None, n_consts=4):
+    def recover_all(self, state=None):
+        if state:
+            self.state = state
+        self.recover_prepare(state=self.state)
+        return self.refresh_solution()
+
+    def recover_prepare(self, state=None):
         if state:
             self.state = state
         assert self.state, "state must be given"
@@ -54,17 +60,7 @@ class QuadDecomposition:
         self.quad_part = None
         self.preinverted_system = None
         self.sQi = sQi = self.simplify_quadratics(state=self.state)
-
-        try:
-            self.prepare_inversion(state=sQi)
-            self.recover_Q(state=sQi)
-            self.invert_Q()
-        except AssertionError as err:
-            print("Q recovery failed:", err)
-            raise self.UnsolvableQ("failed Q attempt")
-
-        self.affine_state = self.make_affine_state()
-        return self.affine_state
+        return sQi
 
     def refresh_solution(self):
         sQi = self.sQi
@@ -92,7 +88,6 @@ class QuadDecomposition:
             deg=2, state=self.s1, skip_last=self.nlin,
         )
         print("quadratic bits:", self.nquad)
-        #print(outrel)
         print()
 
         names = (
@@ -107,8 +102,8 @@ class QuadDecomposition:
         print()
 
         results1, results2 = self.recover_linear_structures_in_output_combinations(anfs)
-        self.xrows, self.yrows = self.select_sparse_quadratics(results1, results2, nlin=self.nlin)
-        print(len(self.xrows), "invoved input bits,", len(self.yrows), "output bits")
+        self.xrows, self.yrows = self.select_sparse_quadratics(anfs, results1, results2, nlin=self.nlin)
+        print(self.config["nquad_x"], "involved input bits,", len(self.yrows), "output bits")
         print()
 
         proj = self.R.ext_matrix_extract_left(matrix(GF(2), self.yrows), self.nlin)
@@ -297,6 +292,9 @@ class QuadDecomposition:
                             res = [sol]
                             break
                 if res:
+                    if len(res) == 2:
+                        xor = res[0] + res[1]
+                        print("x", Bin(xor[1:1+N]), Bin(xor[N+1:]).support)
                     res = choice(res)
                     sol = Bin(res[N+1:]).support
                     print("GOOD, CORRECTING EQUATION", sol)
@@ -424,8 +422,9 @@ class QuadDecomposition:
                     failed.append(irow)
             if failed:
                 print(f"failed at eqs {len(failed)}/{len(self.state.system.system)}: ", failed)
-                assert 0, "recovered system is incorrect"
-                raise self.UnsolvableQ("recovered system is incorrect")
+                raise self.RefreshFailed("recovered system is incorrect")
+                # assert 0, "recovered system is incorrect"
+                # raise self.UnsolvableQ("recovered system is incorrect")
         return self.QI_eqs[:]
 
     def make_affine_state(self):
@@ -536,7 +535,6 @@ class QuadDecomposition:
 
             mask = Bin(set(ifs), N)
             f = sum(anfs[i] for i in ifs)
-            xs = f.parent().gens()
             has1, ls = find_linear_structures(f)
             print("output sum", ifs, ":", "LS dim", ls.nrows())
             if ls.nrows() < N-4:
@@ -547,28 +545,29 @@ class QuadDecomposition:
 
             if ls.nrows() == N-2:
                 results1.append((mask, nonzero))
-                print("    candidate x1x2: 1")
             elif ls.nrows() == N-4:
-                num = 0
-                for p, q in Combinations(nonzero, 2):
-                    for pp, qq in Combinations(nonzero, 2):
-                        pq = tuple(vector(GF(2), p) + vector(GF(2), q))
-                        ppqq = tuple(vector(GF(2), p) + vector(GF(2), q))
-                        if p < q < pq and p < pp < qq < ppqq:
-                            fp = sum(c*x for c, x in zip(p, xs))
-                            fq = sum(c*x for c, x in zip(q, xs))
-                            fpp = sum(c*x for c, x in zip(pp, xs))
-                            fqq = sum(c*x for c, x in zip(qq, xs))
-                            test = f - fp*fq - fpp*fqq
-                            if test.degree() <= 1:
-                                num += 1
-                                if num == 1:
-                                    results2.append((mask, [p, q, pp, qq]))
-                print("   candidate pairs for x1x2 + x3x4:", num)
+                results2.append((mask, nonzero))
         print()
         return results1, results2
 
-    def select_sparse_quadratics(self, results1, results2, nlin):
+    def solve_linear_structure_two_monomials(self, f, nonzero):
+        xs = f.parent().gens()
+        for a, b, c, d in Combinations(nonzero, 4):
+            lst = [
+                (a, b, c, d),
+                (a, c, b, d),
+                (a, d, b, c),
+            ]
+            for p, q, pp, qq in lst:
+                fp = sum(c*x for c, x in zip(p, xs))
+                fq = sum(c*x for c, x in zip(q, xs))
+                fpp = sum(c*x for c, x in zip(pp, xs))
+                fqq = sum(c*x for c, x in zip(qq, xs))
+                test = f - fp*fq - fpp*fqq
+                if test.degree() <= 1:
+                    return [p, q, pp, qq]
+
+    def select_sparse_quadratics(self, anfs, results1, results2, nlin):
         n, N = self.n, self.N
         covered = matrix(GF(2), 0, N)
         cur_rank = 0
@@ -589,22 +588,24 @@ class QuadDecomposition:
         for mask, rs in results1:
             covered2 = covered.stack(vector(GF(2), mask))
             if covered2.rank() > cur_rank:
-                covered = covered2
-                cur_rank = covered.rank()
+                #print("try mask", mask.support)
                 assert len(rs) in (2, 3)
                 # avoid linear bits inside quadratics
                 # (ad-hoc, to avoid x0*y0 clear in the output - not part of the encoding)
                 if not all(max(r[:-nlin]) for r in rs):
-                    print("skip 1 output 1 mono lin*lin")
+                    print("skip 1 output 1 mono lin*lin", mask.support)
                     self.config.setdefault("skip1", 0)
                     self.config["skip1"] += 1
                     skiplin += 1
                     continue
+
+                covered = covered2
+                cur_rank = covered.rank()
                 # rs = list(r for r in rs if max(r[:-nlin]))
                 xrows.extend(rs[:2])
                 yrows.append(mask)
 
-                print("take 1 mono", mask, mask.support, matrix(GF(2), xrows).rank())
+                print("take 1 mono", mask.support, matrix(GF(2), xrows).rank(), rs)
                 # for row in rs[:2]:
                 #     print("   ", row)
                 self.config.setdefault("num1", 0)
@@ -612,13 +613,22 @@ class QuadDecomposition:
         print("indep. output bits with 1 monomial", cur_rank)
         print()
 
-        for mask, rs in results2:
+        for mask, nonzero in results2:
             covered2 = covered.stack(vector(GF(2), mask))
             if covered2.rank() > cur_rank:
+                #print("try mask", mask.support)
+                f = sum(anfs[i] for i in mask.support)
+                rs = self.solve_linear_structure_two_monomials(f=f, nonzero=nonzero)
+                if not rs:
+                    print("WARNING: two monomials no solution?")
+                    continue
+                if all(max(r[:-nlin]) == 0 for r in rs):
+                    continue
+
                 covered = covered2
                 cur_rank = covered.rank()
                 assert len(rs) == 4, len(rs)
-                #rs = list(r for r in rs if max(r[:-nlin]))
+
                 rs1 = rs[:2]
                 rs2 = rs[2:]
                 rs = []
@@ -640,7 +650,7 @@ class QuadDecomposition:
                 xrows.extend(rs)
                 yrows.append(mask)
 
-                print("take 2 mono", mask, mask.support, matrix(GF(2), xrows).rank())
+                print("take 2 mono", mask.support, matrix(GF(2), xrows).rank())
                 # for row in rs:
                 #     print("   ", row)
 
@@ -652,7 +662,7 @@ class QuadDecomposition:
 
         print("indep. output bits with <=2 monomials", cur_rank)
         self.config["nquad_x"] = matrix(GF(2), xrows).rank()
-        assert len(yrows) + skiplin == self.nquad, "failed, some bug"
+        assert len(yrows) + skiplin >= self.nquad, "failed to decompose all quadratics"
         return xrows, yrows
 
 

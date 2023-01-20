@@ -13,13 +13,7 @@ This is all handled in Sage/Python with the `simplifiedOracle.py` module, which 
 
 ## Prerequisites
 
-Requires a C compiler, SageMath and the following python libraries inside the sage environment, and installed M4RI ( https://bitbucket.org/malb/m4ri , required to run the white-box implementation ):
-
-```sh
-sage -pip install -U tqdm binteger
-```
-
-Also, need to compile the fast bilinear optimization library:
+Requires a C compiler, SageMath, and installed M4RI with development headers ( https://bitbucket.org/malb/m4ri , required to run the white-box implementation ). Also, need to compile the fast bilinear optimization library:
 
 ```sh
 make

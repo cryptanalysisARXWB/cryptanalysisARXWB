@@ -84,40 +84,46 @@ class FastAffineMap(AffineMap):
         self._const_out = Bin(self.full_const_out, self.n)
 
     def query(self, x):
-        if not isinstance(x, Bin):
-            x = Bin(x, self.n)
+        # if not isinstance(x, Bin):
+        #     x = Bin(x, self.n)
+        x = int(x)
         return self._query_matrix(x, self._matrix_data) ^ self._const_out
 
     def iquery(self, y):
-        if not isinstance(y, Bin):
-            y = Bin(y, self.n)
-        return self._query_matrix(y ^ self._const_out, self._imatrix_data)
+        # if not isinstance(y, Bin):
+        #     y = Bin(y, self.n)
+        y = int(y)
+        return self._query_matrix(y ^ self._const_out.int, self._imatrix_data)
 
     def _precompute_matrix(self, mat):
         data = []
         if self.block_size > 8:
-            matmap = FastAffineMap(matrix=mat, block_size=8)
+            matmap = FastAffineMap(matrix=mat, block_size=4)
             for i in range(self.n_blocks):
                 cur = []
                 for x in Bin.iter(self.block_size):
                     x = x.resize(self.n) << (i*self.block_size)
                     y = Bin(matmap.query(x))
-                    cur.append(y)
+                    cur.append(y.int)
                 data.append(cur)
         else:
             for i in range(self.n_blocks):
                 cur = []
-                for x in Bin.iter(self.block_size):
-                    x = x.resize(self.n) << (i*self.block_size)
-                    y = Bin(mat * x.vector)
-                    cur.append(y)
+                shift = i * self.block_size
+                for x in range(2**self.block_size):
+                    x <<= shift
+                    y = Bin(mat * Bin(x, self.n).vector)
+                # for x in Bin.iter(self.block_size):
+                #     x = x.resize(self.n) << (i*self.block_size)
+                #     y = Bin(mat * x.vector)
+                    cur.append(y.int)
                 data.append(cur)
         return data
 
     def _query_matrix(self, x, data):
-        assert isinstance(x, Bin)
+        x = int(x)
         y = 0
         for row in data:
             y ^= row[x & self.mask]
             x >>= self.block_size
-        return y
+        return Bin(y, self.n)

@@ -64,80 +64,77 @@ for RNO in range(1, NR):
     print("========================")
     SECRET = WBO.rounds[RNO]
 
+    unsolvableQ = 0
+    refreshes = 0
+    scratches = 0
     while True:
         s0 = AttackState(n=n, oracle=SECRET.query).randomized()
 
         fnameQ = "cache/wbid%08X_round%02d_Q" % (WBID, RNO)
+        fnameS = "cache/wbid%08X_round%02d_ASA" % (WBID, RNO)
         print(fnameQ)
         sys.stdout.flush()
         sys.stderr.flush()
 
         try:
-            Q = load(fnameQ)
-        except:
-            while True:
-                print(f"Date (quad stage):", datetime.datetime.now())
-                Q = QuadDecomposition(n)
-                try:
-                    with Time("quad-recover-all"):
-                        Q.recover_all(state=s0, n_consts=8)
-                    break
-                except Q.UnsolvableError as err:
-                    print("Q decomposition failed:", err, "retrying from scratch")
-                    continue
-            save(Q, fnameQ)
-        s1 = Q.affine_state
-        s1.oracle
-
-        print("Date (affine stage):", datetime.datetime.now())
-        fnameS = "cache/wbid%08X_round%02d_ASA" % (WBID, RNO)
-        print(fnameS)
-        try:
             stateF = load(fnameS)
+            Q = load(fnameQ)
+            break
         except:
+            print(f"Date (quad stage):", datetime.datetime.now())
+            Q = QuadDecomposition(n)
+            with Time("quad-prepare"):
+                Q.recover_prepare(state=s0)
+
+            print("Date (affine stage):", datetime.datetime.now())
+            print(fnameS)
             # loop to retry different candidates for Q
-            totry = 8
-            while totry > 0:
-                print(f"Date (totry={totry}):", datetime.datetime.now())
+            stateF = None
+            for itr in range(8):
+                print(f"Date (itr={itr}):", datetime.datetime.now())
+
+                try:
+                    with Time("quad-refresh-sol"):
+                        s1 = Q.refresh_solution()
+                except Q.RefreshFailed as err:
+                    print("refresh failed #", itr, ":", err)
+                    continue
+                except Q.UnsolvableError as err:
+                    print("unsolvable Q #", itr, ":", err)
+                    unsolvableQ += 1
+                    break
+
                 R = RoundDecomposition(n)
                 try:
                     with Time("affine-fastened-recover"):
                         stateF = R.recover_all(state=s1, num_tries=1)
                     break
                 except R.UnsolvableA as err:
-                    print("MSB FAIL #", totry, "refresh Q solution", err)
-                    while totry > 0:
-                        try:
-                            with Time("quad-refresh-sol"):
-                                s1 = Q.refresh_solution()
-                            break
-                        except Q.RefreshFailed as err:
-                            print("refresh failed", totry, ":", err)
-                            totry -= 1
-                            continue
-                    save(Q, fnameQ)
-            else:
-                print("\nMSB FAIL , restarting full Q\n")
-                os.unlink(fnameQ + ".sobj")
+                    print("MSB FAIL #", itr, "refresh Q solution", err)
+                    refreshes += 1
+                    continue
+
+            if not stateF or not stateF.decomposed_mapX:
+                print("retrying Q from scratch")
+                scratches += 1
                 continue
 
+            assert Q.quad_part
+            save(Q, fnameQ)
             save(stateF, fnameS)
-
-        x = Bin.random(N)
-        y = stateF.query(x)
-        stateF = load(fnameS)
-        yy = stateF.query(x)
-        assert y == yy
-        break
+            break
 
     configs[RNO] = Q.config.copy()
+    configs[RNO]["unsolvableQ_tries"] = unsolvableQ
+    configs[RNO]["refreshes"] = refreshes
+    configs[RNO]["retries_from_scratch"] = scratches
     print("RNO:", *[f"{k}={v}" for k, v in configs[RNO].items()])
-pass
+
+print()
 
 for RNO in configs:
     print(f"ROUND {RNO:2d}: ", *[f"{k}={v}" for k, v in configs[RNO].items()])
 TimeReport()
-
 
 # Load decompositions
 QFS = [None]
@@ -195,7 +192,6 @@ for RNO in range(1, NR-1):
     fnameASA2 = "cache/wbid%08X_round%02d_ASA2" % (WBID, RNO)
     print(fnameASA2)
     state0 = AttackState(n=n, oracle=func)
-    assert func(x) == state0.query(x)
 
     try:
         stateF = load(fnameASA2)
@@ -373,3 +369,6 @@ for bits in Bin.iter(8):
             print(*[d.hex for d in fullrk[2:]])
         print()
 
+for RNO in configs:
+    print(f"ROUND {RNO:2d}: ", *[f"{k}={v}" for k, v in configs[RNO].items()])
+TimeReport()
